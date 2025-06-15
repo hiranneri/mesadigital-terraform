@@ -21,7 +21,7 @@ resource "aws_subnet" "mesadigital_subnet_pub" {
 
 resource "aws_subnet" "mesadigital_subnet_priv" {
   vpc_id                  = aws_vpc.mesadigital_vpc_1.id
-  cidr_block              = "10.0.1.0/24"
+  cidr_block              = "10.0.2.0/24"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
 
@@ -54,6 +54,11 @@ resource "aws_route_table" "mesadigital_route_table_pub" {
 resource "aws_route_table" "mesadigital_route_table_priv" {
   vpc_id = aws_vpc.mesadigital_vpc_1.id
 
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.mesadigital_natgateway.id
+  }
+
   tags = {
     "Name" = "mesadigital_route_table_priv"
   }
@@ -84,7 +89,7 @@ resource "aws_nat_gateway" "mesadigital_natgateway" {
   tags = {
     Name = "mesadigital_natgateway"
   }
-  
+
   depends_on = [aws_internet_gateway.mesadigital_igw]
 }
 

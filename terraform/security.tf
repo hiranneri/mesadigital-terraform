@@ -13,14 +13,34 @@ resource "aws_security_group_rule" "mesadigital_rules_saida" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
-resource "aws_security_group_rule" "mesadigital_rules_http_entrada" {
-  from_port         = 80
+resource "aws_security_group_rule" "mesadigital_rules_http_entrada_vendas" {
+  from_port         = 8081
   protocol          = "tcp"
   security_group_id = aws_security_group.mesadigital_security_group_pub.id
-  to_port           = 80
+  to_port           = 8081
   type              = "ingress"
   cidr_blocks       = ["0.0.0.0/0"]
 }
+
+resource "aws_security_group_rule" "mesadigital_rules_http_entrada_financeiro" {
+  from_port         = 8082
+  protocol          = "tcp"
+  security_group_id = aws_security_group.mesadigital_security_group_pub.id
+  to_port           = 8082
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
+
+resource "aws_security_group_rule" "mesadigital_rules_http_entrada_operacoes" {
+  from_port         = 8083
+  protocol          = "tcp"
+  security_group_id = aws_security_group.mesadigital_security_group_pub.id
+  to_port           = 8083
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
 
 resource "aws_security_group_rule" "mesadigital_rules_ssh_entrada" {
   from_port         = 22
