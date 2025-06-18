@@ -2,13 +2,13 @@ version: '3.7'
 
 services:
   vendas:
-    image: hiranneri/vendas-service:latest
+    image: hiranneri/vendas-service:prod
     container_name: vendas-app
     ports:
       - "8081:8081"
     environment:
       - JAVA_OPTS=-Xms256m -Xmx512m
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=prod
 
   financeiro:
     image: hiranneri/financeiro-service
