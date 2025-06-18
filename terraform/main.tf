@@ -134,24 +134,24 @@ resource "aws_route_table" "private" {
   }
 }
 
-# resource "aws_instance" "mesadigital_ec2_1" {
-#   instance_type          = "t2.micro"
-#   key_name               = aws_key_pair.mesadigital_keypair.id
-#   vpc_security_group_ids = [aws_security_group.mesadigital_security_group_pub.id]
-#   subnet_id              = aws_subnet.mesadigital_subnet_pub.id
-#
-#   ami = data.aws_ami.mesadigital_ami.id
-#
-#   root_block_device {
-#     volume_size = 0
-#   }
-#
-#   tags = {
-#     Name = "mesadigital_ec2"
-#   }
-#
-#   user_data = file("userdata.tpl")
-#
-# }
+resource "aws_instance" "mesadigital_ec2_1" {
+  instance_type          = "t2.micro"
+  key_name               = aws_key_pair.mesadigital_keypair.id
+  vpc_security_group_ids = [aws_security_group.mesadigital_security_group_pub.id]
+  subnet_id              = aws_subnet.mesadigital_subnet_pub.id
+
+  ami = data.aws_ami.mesadigital_ami.id
+
+  root_block_device {
+    volume_size = 0
+  }
+
+  tags = {
+    Name = "mesadigital_ec2"
+  }
+
+  user_data = file("userdata.tpl")
+
+}
 
 
